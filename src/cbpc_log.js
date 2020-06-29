@@ -11,8 +11,8 @@ var CBPC_LOG = (() => {
 
   var jsErr = (function () {
     "use strict";
-    var _url = "http://10.8.1.25:100/api/log.gif";
-    var ipUrl = "http://api.cbpc.ltd/ip";
+    var _url = "//10.8.1.25:100/1084/aec97f7bed.gif";
+    var ipUrl = "//10.8.1.25:100/ip";
     var _appendData = {};
     /**
      *对Date的扩展，将 Date 转化为指定格式的String
