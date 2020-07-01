@@ -83,37 +83,37 @@ var CBPC_LOG = (() => {
 
       function getOSName() {
         var osVersion = "unknown";
-        if (userAgent.indexOf("Windows NT 10.0 ")) {
+        if (userAgent.indexOf("Windows NT 10.0") > -1) {
           osVersion = "Windows 10";
-        } else if (userAgent.indexOf("Windows NT 6.3")) {
+        } else if (userAgent.indexOf("Windows NT 6.3") > -1) {
           osVersion = "Windows 8.1";
-        } else if (userAgent.indexOf("Windows NT 6.2")) {
+        } else if (userAgent.indexOf("Windows NT 6.2") > -1) {
           osVersion = "Windows 8";
-        } else if (userAgent.indexOf("Windows NT 6.1")) {
+        } else if (userAgent.indexOf("Windows NT 6.1") > -1) {
           osVersion = "Windows 7";
-        } else if (userAgent.indexOf("Windows NT 6.0")) {
+        } else if (userAgent.indexOf("Windows NT 6.0") > -1) {
           osVersion = "Windows Vista";
-        } else if (userAgent.indexOf("Windows NT 5.2")) {
+        } else if (userAgent.indexOf("Windows NT 5.2") > -1) {
           osVersion = "Windows Server 2003";
-        } else if (userAgent.indexOf("Windows NT 5.1")) {
+        } else if (userAgent.indexOf("Windows NT 5.1") > -1) {
           osVersion = "Windows XP";
-        } else if (userAgent.indexOf("Windows NT 5")) {
+        } else if (userAgent.indexOf("Windows NT 5") > -1) {
           osVersion = "Windows 2000";
-        } else if (userAgent.indexOf("Windows NT 4")) {
+        } else if (userAgent.indexOf("Windows NT 4") > -1) {
           osVersion = "Windows NT 4.0";
-        } else if (userAgent.indexOf("Me")) {
+        } else if (userAgent.indexOf("Me") > -1) {
           osVersion = "Windows Me";
-        } else if (userAgent.indexOf("98")) {
+        } else if (userAgent.indexOf("98") > -1) {
           osVersion = "Windows 98";
-        } else if (userAgent.indexOf("95")) {
+        } else if (userAgent.indexOf("95") > -1) {
           osVersion = "Windows 95";
-        } else if (userAgent.indexOf("Mac")) {
+        } else if (userAgent.indexOf("Mac") > -1) {
           osVersion = "Mac";
-        } else if (userAgent.indexOf("Unix")) {
+        } else if (userAgent.indexOf("Unix") > -1) {
           osVersion = "UNIX";
-        } else if (userAgent.indexOf("Linux")) {
+        } else if (userAgent.indexOf("Linux") > -1) {
           osVersion = "Linux";
-        } else if (userAgent.indexOf("SunOS")) {
+        } else if (userAgent.indexOf("SunOS") > -1) {
           osVersion = "SunOS";
         }
         return osVersion;
@@ -172,7 +172,8 @@ var CBPC_LOG = (() => {
 
       return {
         rec_time: datetime,
-        user_agent: userAgent,
+        // 不传 useragent，系统判断出版本和浏览器即可
+        // user_agent: userAgent,
         url: window.location.href,
         browser: getBrowserVersion(),
         os: getOSName(),
@@ -211,18 +212,18 @@ var CBPC_LOG = (() => {
     function _detailedErrors(e) {
       var i = _errorData(e);
 
-      var str = [
-        "%cType: %c" + i.type,
-        "%cError: %c" + i.error,
-        "%cStackTrace: %c" + i.stackTrace,
-        "%cFile Name: %c" + i.filename,
-        "%cPath: %c" + i.path,
-        "%cLine: %c" + i.line,
-        "%cColumn: %c" + i.column,
-        "%cDebug : %c" + i.path + ":" + i.line,
-      ].join("\n");
+      var str = {
+        Type: i.type,
+        Error: i.error,
+        StackTrace: i.stackTrace,
+        "File Name": i.filename,
+        Path: i.path,
+        Line: i.line,
+        Column: i.column,
+        Debug: i.path + ":" + i.line,
+      };
 
-      return str;
+      return JSON.stringify(str);
     }
 
     function err(data) {
